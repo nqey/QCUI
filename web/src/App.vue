@@ -3,7 +3,10 @@
     <v-header/>
     <div class="container">
       <v-nav/>
-      <router-view/>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
     </div>
   </div>
 </template>

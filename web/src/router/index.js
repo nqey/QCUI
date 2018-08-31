@@ -9,7 +9,10 @@ export default new Router({
     {
       path: '/agent',
       name: 'agent',
-      component: agent
+      component: agent,
+      meta: {
+        keepAlive: false,
+      },
     }
   ]
 })
