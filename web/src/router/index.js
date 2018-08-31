@@ -11,8 +11,8 @@ export default new Router({
       name: 'agent',
       component: agent,
       meta: {
-        keepAlive: false,
-      },
+        keepAlive: false
+      }
     }
   ]
 })

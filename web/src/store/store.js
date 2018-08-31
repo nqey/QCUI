@@ -3,21 +3,18 @@
    get: this.$store.state.xxx
    set: this.$store.commit('xxx'，xxx);
  */
-import Vuex from 'vuex';
-import Vue from 'vue';
+import Vuex from 'vuex'
+import Vue from 'vue'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     // isValidator: true,
-    toLink: '',
+    toLink: ''
   },
   mutations: {
     // setValidator: (state, bool) => {
     //   state.isValidator = bool;
     // },
-    setToLink: (state, link) => {
-      state.toLink = link;
-    },
-  },
-});
+  }
+})
