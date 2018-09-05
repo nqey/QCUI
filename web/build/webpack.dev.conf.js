@@ -68,9 +68,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ]),
     new BrowserSyncPlugin({
       host: 'localhost',
-      port: 3000,
-      proxy: 'localhost:8080',
-      files: '**/*.js'
+      port: 4000,
+      proxy: 'localhost:8080'
+      // files: 'src/*',
+      // files: 'index.html'
       // server: {
       //   //指定服务器启动根目录
       //   baseDir: 'localhost:8080'
