@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -64,9 +65,21 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      proxy: 'localhost:8080',
+      files: '**/*.js'
+      // server: {
+      //   //指定服务器启动根目录
+      //   baseDir: 'localhost:8080'
+      // }
+    })
   ]
 })
+
+
 
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port

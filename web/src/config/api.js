@@ -1,7 +1,9 @@
 import axios from 'axios'
 // import cache from './cache'
 
-const apiSrv = 'http://localhost:3001'
+// const apiSrv = 'http://localhost:3001'
+const apiSrv = 'http://192.168.1.226:3001'
+// const apiSrv = ''
 
 /**
  * @author 秦超 on 2018年8月23日
