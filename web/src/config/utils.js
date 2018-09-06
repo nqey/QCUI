@@ -254,3 +254,9 @@ export const transfer = function(opts = {}) {
   // 跳转到操作成功页面
   this.$router.push(`/transfer/${encodeURIComponent(JSON.stringify(opts))}`);
 };
+
+/**
+ * 对象深刻隆
+ * @param opts ：{}
+ */
+export const clone = opts => JSON.parse(JSON.stringify(opts || {}));
