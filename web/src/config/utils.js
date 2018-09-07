@@ -213,7 +213,6 @@ export const bIsPcOrPhone = () => {
  * 全屏
  */
 export const fullScreen = (el) => {
-  window.console.log(el);
   const rfs = el.requestFullScreen || el.webkitRequestFullScreen || el.mozRequestFullScreen || el.msRequestFullscreen;    
   if(typeof rfs != "undefined" && rfs) {
     rfs.call(el);
@@ -289,7 +288,7 @@ export const getArr = (o) => (o || [])
       right2left: this.nextIndex
     })
  */
-export const touch = (o = {
+export const touch = (fns = {
   left2right: () => {},
   right2left: () => {},
   top2bottom: () => {},
@@ -311,12 +310,18 @@ export const touch = (o = {
       }
     }
   }
+
+  const runFn = (fnnm) => {
+    if (flag) {
+      flag = false
+      fns[fnnm] && fns[fnnm]()
+    }
+  }
+
   document.body.addEventListener('touchstart', (e) => {
-    window.console.log(e)
     cancelable(e)
     startX = e.changedTouches[0].pageX
     startY = e.changedTouches[0].pageY
-    window.console.log('touchstart')
   }, false)
 
   document.body.addEventListener('touchmove', (e) => {
@@ -327,28 +332,16 @@ export const touch = (o = {
     Y = endY - startY
     if (Math.abs(X) > Math.abs(Y) && X > 0) {
       // 左到右
-      if (flag) {
-        flag = false
-        o.left2right()
-      }
+      runFn('left2right')
     } else if (Math.abs(X) > Math.abs(Y) && X < 0) {
       // 右到左
-      if (flag) {
-        flag = false
-        o.right2left()
-      }
+      runFn('right2left')
     } else if (Math.abs(Y) > Math.abs(X) && Y > 0) {
       // 上到下
-      if (flag) {
-        flag = false
-        o.top2bottom()
-      }
+      runFn('top2bottom')
     } else if (Math.abs(Y) > Math.abs(X) && Y < 0) {
       // 下到上
-      if (flag) {
-        flag = false
-        o.bottom2top()
-      }
+      runFn('bottom2top')
     }
   }, false)
 
