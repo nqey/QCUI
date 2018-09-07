@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /**
  * @param data
  * @returns {array|object|null|undefined|function|error|regexp|number|string|boolean}
@@ -260,3 +262,98 @@ export const transfer = function(opts = {}) {
  * @param opts ：{}
  */
 export const clone = opts => JSON.parse(JSON.stringify(opts || {}));
+
+/**
+ * 自动补全位数
+ * @param num 数字
+ * @param length 位数
+ */
+export const prefixInteger = (num, length = 2) =>  (Array(length).join('0') + num).slice(-length)
+
+/**
+ * 获取数组长度
+ * @param array
+ */
+export const getArrLen = (o) => (o || []).length
+
+/**
+ * 获取数组长
+ * @param array
+ */
+export const getArr = (o) => (o || [])
+
+/**
+ * 移动端上下左右执行事件
+ * 列子： touch({
+      left2right: this.preIndex,
+      right2left: this.nextIndex
+    })
+ */
+export const touch = (o = {
+  left2right: () => {},
+  right2left: () => {},
+  top2bottom: () => {},
+  bottom2top: () => {}
+}) => {
+  let startX
+  let startY
+  let endX
+  let endY
+  let X
+  let Y
+  let flag = true
+  const cancelable = (e) => {
+    // 判断默认行为是否可以被禁用
+    if (e.cancelable) {
+      // 判断默认行为是否已经被禁用
+      if (!e.defaultPrevented) {
+        // e.preventDefault()
+      }
+    }
+  }
+  document.body.addEventListener('touchstart', (e) => {
+    window.console.log(e)
+    cancelable(e)
+    startX = e.changedTouches[0].pageX
+    startY = e.changedTouches[0].pageY
+    window.console.log('touchstart')
+  }, false)
+
+  document.body.addEventListener('touchmove', (e) => {
+    cancelable(e)
+    endX = e.changedTouches[0].pageX
+    endY = e.changedTouches[0].pageY
+    X = endX - startX
+    Y = endY - startY
+    if (Math.abs(X) > Math.abs(Y) && X > 0) {
+      // 左到右
+      if (flag) {
+        flag = false
+        o.left2right()
+      }
+    } else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+      // 右到左
+      if (flag) {
+        flag = false
+        o.right2left()
+      }
+    } else if (Math.abs(Y) > Math.abs(X) && Y > 0) {
+      // 上到下
+      if (flag) {
+        flag = false
+        o.top2bottom()
+      }
+    } else if (Math.abs(Y) > Math.abs(X) && Y < 0) {
+      // 下到上
+      if (flag) {
+        flag = false
+        o.bottom2top()
+      }
+    }
+  }, false)
+
+  document.body.addEventListener('touchend', (e) => {
+    cancelable(e)
+    flag = true
+  }, false)
+}
