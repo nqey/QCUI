@@ -1,2 +1,0 @@
-browser-sync start --server --files "**/*.css, **/*.html, **/*.js"
-browser-sync start --proxy "192.168.1.226:8080" "**/*.css, **/*.html, **/*.js"

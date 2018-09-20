@@ -9,7 +9,10 @@
       "location": "/var/lib/cruise-agent",
       "resources": [
         "Ubuntu",
-        "chrome"
+        "chrome",
+        null,
+        null,
+        null
       ],
       "id": 1
     },
